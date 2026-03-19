@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>CA DMV Test Prep | הכנה לתאוריה קליפורניה</title>
 <meta name="description" content="Practice for the California DMV written knowledge test with Hebrew explanations">
@@ -104,6 +104,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .nav-bottom .nav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 20px;border:none;background:none;color:var(--text3);cursor:pointer;font-family:var(--font);font-size:.7rem;border-radius:8px;transition:all .2s ease}
 .nav-bottom .nav-btn.active{color:var(--accent2)}
 .nav-bottom .nav-btn .icon{font-size:1.3rem}
+.sign-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px;margin:12px 0}
+.sign-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;background:var(--surface);border-radius:8px;border:1px solid var(--surface3)}
+.sign-item svg{width:60px;height:60px}
+.sign-item span{font-size:.7rem;color:var(--text2);text-align:center;direction:rtl}
 @media(min-width:768px){#app{padding:24px 32px 100px}.header h1{font-size:2.2rem}.stats-grid{grid-template-columns:repeat(4,1fr)}.q-text{font-size:1.25rem}.option{padding:16px 20px}}
 
 .lesson-card{background:var(--surface);border:1px solid var(--surface3);border-radius:var(--radius);padding:20px;margin-bottom:16px;direction:rtl;text-align:right}
@@ -302,7 +306,7 @@ const QUESTIONS = [
 
 const LESSONS = {
   signs: [
-    {title:"Types of Signs by Shape & Color",content:"<h4>צורות שלטים וצבעים</h4> <p>בארה״ב, צורת השלט והצבע שלו מספרים לך מה הוא אומר עוד לפני שקראת אותו:</p> <ul> <li><strong>מתומן (8 צלעות) אדום</strong> = STOP / עצור — תמיד!</li> <li><strong>משולש הפוך</strong> אדום/לבן = YIELD / תן זכות קדימה</li> <li><strong>מעוין צהוב</strong> = אזהרה (עיקול, מעבר חציה, וכו׳)</li> <li><strong>מלבן לבן</strong> = חוק/תקנה (מהירות, כללים)</li> <li><strong>מחומש (5 צלעות)</strong> = אזור בית ספר</li> <li><strong>דגלון (pennant)</strong> = אזור ללא עקיפה</li> <li><strong>עיגול צהוב עם X</strong> = מעבר מסילת רכבת</li> <li><strong>כתום</strong> = אזור עבודות/בנייה</li> <li><strong>ירוק</strong> = הכוונה ומרחקים</li> <li><strong>כחול</strong> = שירותים (דלק, אוכל, בית חולים)</li> <li><strong>חום</strong> = פנאי ופארקים</li> </ul> <div class=\"highlight\"><strong>💡 טיפ:</strong> בישראל רוב השלטים עגולים. בארה״ב הצורה חשובה מאוד — היא עוזרת לזהות את השלט גם מרחוק או בערפל.</div>"},
+    {title:"Types of Signs by Shape & Color",content:"<h4>צורות שלטים וצבעים</h4> <p>בארה״ב, צורת השלט והצבע שלו מספרים לך מה הוא אומר עוד לפני שקראת אותו:</p> <ul> <li><strong>מתומן (8 צלעות) אדום</strong> = STOP / עצור — תמיד!</li> <li><strong>משולש הפוך</strong> אדום/לבן = YIELD / תן זכות קדימה</li> <li><strong>מעוין צהוב</strong> = אזהרה (עיקול, מעבר חציה, וכו׳)</li> <li><strong>מלבן לבן</strong> = חוק/תקנה (מהירות, כללים)</li> <li><strong>מחומש (5 צלעות)</strong> = אזור בית ספר</li> <li><strong>דגלון (pennant)</strong> = אזור ללא עקיפה</li> <li><strong>עיגול צהוב עם X</strong> = מעבר מסילת רכבת</li> <li><strong>כתום</strong> = אזור עבודות/בנייה</li> <li><strong>ירוק</strong> = הכוונה ומרחקים</li> <li><strong>כחול</strong> = שירותים (דלק, אוכל, בית חולים)</li> <li><strong>חום</strong> = פנאי ופארקים</li> </ul><div class=\"sign-grid\"><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><polygon points=\"50,2 79,14 93,43 93,57 79,86 50,98 21,86 7,57 7,43 21,14\" fill=\"#dc2626\" stroke=\"white\" stroke-width=\"3\"/><text x=\"50\" y=\"57\" text-anchor=\"middle\" fill=\"white\" font-size=\"22\" font-weight=\"bold\">STOP</text></svg><span>Stop / עצור</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><polygon points=\"50,95 5,10 95,10\" fill=\"white\" stroke=\"#dc2626\" stroke-width=\"5\"/><text x=\"50\" y=\"45\" text-anchor=\"middle\" fill=\"#dc2626\" font-size=\"16\" font-weight=\"bold\">YIELD</text></svg><span>Yield / תן קדימה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"15\" y=\"15\" width=\"70\" height=\"70\" fill=\"#eab308\" stroke=\"black\" stroke-width=\"2\" transform=\"rotate(45 50 50)\"/><text x=\"50\" y=\"55\" text-anchor=\"middle\" fill=\"black\" font-size=\"32\" font-weight=\"bold\">⚠</text></svg><span>Warning / אזהרה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"10\" y=\"15\" width=\"80\" height=\"70\" fill=\"white\" stroke=\"black\" stroke-width=\"3\" rx=\"3\"/><text x=\"50\" y=\"42\" text-anchor=\"middle\" fill=\"black\" font-size=\"12\" font-weight=\"bold\">SPEED</text><text x=\"50\" y=\"55\" text-anchor=\"middle\" fill=\"black\" font-size=\"12\" font-weight=\"bold\">LIMIT</text><text x=\"50\" y=\"74\" text-anchor=\"middle\" fill=\"black\" font-size=\"22\" font-weight=\"bold\">25</text></svg><span>Regulation / תקנה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><polygon points=\"50,5 95,35 80,95 20,95 5,35\" fill=\"#eab308\" stroke=\"black\" stroke-width=\"2\"/><text x=\"50\" y=\"50\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-weight=\"bold\">SCHOOL</text><text x=\"50\" y=\"70\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-weight=\"bold\">ZONE</text></svg><span>School / ביה\"ס</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#eab308\" stroke=\"black\" stroke-width=\"2\"/><text x=\"50\" y=\"42\" text-anchor=\"middle\" fill=\"black\" font-size=\"28\" font-weight=\"bold\">RR</text><line x1=\"20\" y1=\"60\" x2=\"80\" y2=\"60\" stroke=\"black\" stroke-width=\"3\"/><text x=\"50\" y=\"58\" text-anchor=\"middle\" fill=\"black\" font-size=\"28\" font-weight=\"bold\">X</text></svg><span>Railroad / רכבת</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"15\" y=\"15\" width=\"70\" height=\"70\" fill=\"#f97316\" stroke=\"black\" stroke-width=\"2\" transform=\"rotate(45 50 50)\"/><text x=\"50\" y=\"48\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-weight=\"bold\">ROAD</text><text x=\"50\" y=\"62\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-weight=\"bold\">WORK</text></svg><span>Construction / בנייה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"5\" y=\"20\" width=\"90\" height=\"60\" fill=\"#16a34a\" stroke=\"white\" stroke-width=\"3\" rx=\"5\"/><text x=\"50\" y=\"48\" text-anchor=\"middle\" fill=\"white\" font-size=\"14\" font-weight=\"bold\">EXIT 12</text><text x=\"50\" y=\"66\" text-anchor=\"middle\" fill=\"white\" font-size=\"11\">1 MILE</text></svg><span>Guide / הכוונה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"10\" y=\"10\" width=\"80\" height=\"80\" fill=\"#2563eb\" stroke=\"white\" stroke-width=\"3\" rx=\"5\"/><text x=\"50\" y=\"40\" text-anchor=\"middle\" fill=\"white\" font-size=\"26\">⛽</text><text x=\"50\" y=\"65\" text-anchor=\"middle\" fill=\"white\" font-size=\"12\" font-weight=\"bold\">GAS</text><text x=\"50\" y=\"80\" text-anchor=\"middle\" fill=\"white\" font-size=\"10\">NEXT EXIT</text></svg><span>Services / שירותים</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#dc2626\" stroke=\"white\" stroke-width=\"3\"/><rect x=\"15\" y=\"40\" width=\"70\" height=\"20\" fill=\"white\" rx=\"2\"/><text x=\"50\" y=\"36\" text-anchor=\"middle\" fill=\"white\" font-size=\"9\" font-weight=\"bold\">DO NOT</text><text x=\"50\" y=\"55\" text-anchor=\"middle\" fill=\"#dc2626\" font-size=\"11\" font-weight=\"bold\">ENTER</text></svg><span>Do Not Enter</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><polygon points=\"5,20 95,50 5,80\" fill=\"#eab308\" stroke=\"black\" stroke-width=\"2\"/><text x=\"35\" y=\"47\" text-anchor=\"middle\" fill=\"black\" font-size=\"8\" font-weight=\"bold\">NO</text><text x=\"35\" y=\"58\" text-anchor=\"middle\" fill=\"black\" font-size=\"7\" font-weight=\"bold\">PASSING</text></svg><span>No Passing / ללא עקיפה</span></div><div class=\"sign-item\"><svg viewBox=\"0 0 100 100\"><rect x=\"10\" y=\"15\" width=\"80\" height=\"70\" fill=\"#78350f\" stroke=\"white\" stroke-width=\"3\" rx=\"5\"/><text x=\"50\" y=\"45\" text-anchor=\"middle\" fill=\"white\" font-size=\"22\">🌲</text><text x=\"50\" y=\"70\" text-anchor=\"middle\" fill=\"white\" font-size=\"11\" font-weight=\"bold\">PARK</text></svg><span>Recreation / פנאי</span></div></div> <div class=\"highlight\"><strong>💡 טיפ:</strong> בישראל רוב השלטים עגולים. בארה״ב הצורה חשובה מאוד — היא עוזרת לזהות את השלט גם מרחוק או בערפל.</div>"},
     {title:"Pavement Markings",content:"<h4>סימוני כביש — צבעים וקווים</h4> <p>סימוני הכביש בארה״ב שונים מישראל. הנה הכללים:</p> <ul> <li><strong>צהוב</strong> = מפריד בין כיוונים מנוגדים (כמו קו אמצע)</li> <li><strong>לבן</strong> = מפריד בין נתיבים באותו כיוון</li> <li><strong>קו מקוטע</strong> = מותר לחצות/להחליף נתיב</li> <li><strong>קו רציף</strong> = לא מומלץ/אסור לחצות</li> <li><strong>צהוב כפול רציף</strong> = אסור לעקוף משני הכיוונים</li> <li><strong>רפלקטורים אדומים</strong> = אתה נוסע בכיוון הלא נכון!</li> </ul> <div class=\"conversion\">🔄 בישראל: קו לבן רציף = אסור לחצות. בארה״ב: אותו עיקרון, אבל שימו לב לצבע — צהוב = כיוונים מנוגדים.</div>"},
     {title:"Traffic Signals",content:"<h4>רמזורים ואותות</h4> <ul> <li><strong>ירוק</strong> = נסע (אבל תן קדימה בפניה שמאלה!)</li> <li><strong>צהוב</strong> = עצור אם אפשר בבטחה. אם כבר בצומת — המשך.</li> <li><strong>אדום</strong> = עצור. מותר לפנות ימינה אחרי עצירה מלאה (אלא אם יש שלט \"No Turn on Red\").</li> <li><strong>חץ ירוק</strong> = תור מוגן — פנה בכיוון החץ בבטחה.</li> <li><strong>אדום מהבהב</strong> = כמו תמרור עצור — עצור לגמרי.</li> <li><strong>צהוב מהבהב</strong> = זהירות — האט והמשך.</li> </ul> <div class=\"highlight\"><strong>💡 הבדל מישראל:</strong> בקליפורניה מותר לפנות ימינה באדום (אחרי עצירה) — זה חוקי ואפילו מצופה! בישראל זה אסור.</div>"}
   ],
@@ -745,14 +749,14 @@ function renderLearn() {
       <button class="btn-back" onclick="navigate('home')">← חזרה לדף הבית</button>
       <h2 style="font-size:1.4rem;font-weight:800;margin:12px 0">🎓 מדריך לימוד</h2>
       <p style="color:var(--text2);font-size:.85rem;margin-bottom:16px;direction:rtl;text-align:right">הסברים מפורטים בעברית על כל נושא. קרא לפני שמתחיל לתרגל שאלות.</p>
-      \${cats.map(([key, cat]) => {
+      ${cats.map(([key, cat]) => {
         const lessons = LESSONS[key] || [];
         return `
-        <div class="card" onclick="startLearn('\${key}')">
-          <div class="card-icon">\${cat.icon}</div>
-          <h3>\${cat.name}</h3>
-          <p>\${cat.he}</p>
-          <div class="badge">\${lessons.length} שיעורים</div>
+        <div class="card" onclick="startLearn('${key}')">
+          <div class="card-icon">${cat.icon}</div>
+          <h3>${cat.name}</h3>
+          <p>${cat.he}</p>
+          <div class="badge">${lessons.length} שיעורים</div>
         </div>`;
       }).join('')}
     </div>`;
@@ -766,20 +770,20 @@ function renderLearnTopic() {
     <div class="screen active">
       <button class="btn-back" onclick="navigate('learn')">← חזרה לנושאים</button>
       <div class="q-header">
-        <span class="q-num">\${state.learnIdx + 1} / \${lessons.length}</span>
-        <span class="q-cat">\${cat.icon} \${cat.name}</span>
+        <span class="q-num">${state.learnIdx + 1} / ${lessons.length}</span>
+        <span class="q-cat">${cat.icon} ${cat.name}</span>
       </div>
-      <div class="progress-bar"><div class="fill" style="width:\${((state.learnIdx + 1) / lessons.length) * 100}%"></div></div>
+      <div class="progress-bar"><div class="fill" style="width:${((state.learnIdx + 1) / lessons.length) * 100}%"></div></div>
       <div class="lesson-card">
-        <h3>\${lesson.title}</h3>
-        \${lesson.content}
+        <h3>${lesson.title}</h3>
+        ${lesson.content}
       </div>
       <div class="lesson-nav">
-        <button class="btn btn-secondary btn-sm" onclick="prevLearn()" \${state.learnIdx === 0 ? 'disabled style="opacity:.4"' : ''}>← הקודם</button>
+        <button class="btn btn-secondary btn-sm" onclick="prevLearn()" ${state.learnIdx === 0 ? 'disabled style="opacity:.4"' : ''}>← הקודם</button>
         <div class="lesson-dots">
-          \${lessons.map((_, i) => `<div class="lesson-dot \${i === state.learnIdx ? 'active' : ''}" onclick="goLearn(\${i})"></div>`).join('')}
+          ${lessons.map((_, i) => `<div class="lesson-dot ${i === state.learnIdx ? 'active' : ''}" onclick="goLearn(${i})"></div>`).join('')}
         </div>
-        <button class="btn btn-primary btn-sm" onclick="nextLearn()">\${state.learnIdx < lessons.length - 1 ? 'הבא →' : '✓ סיום'}</button>
+        <button class="btn btn-primary btn-sm" onclick="nextLearn()">${state.learnIdx < lessons.length - 1 ? 'הבא →' : '✓ סיום'}</button>
       </div>
     </div>`;
 }
