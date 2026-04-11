@@ -128,6 +128,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .lesson-dot{width:8px;height:8px;border-radius:50%;background:var(--surface3);transition:all .2s}
 .lesson-dot.active{background:var(--accent);width:20px;border-radius:4px}
 
+.user-select-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;gap:24px}
+.user-cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.user-card{background:var(--surface);border:2px solid var(--surface3);border-radius:var(--radius);padding:32px 40px;cursor:pointer;transition:all .25s ease;text-align:center;min-width:160px}
+.user-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 32px rgba(99,102,241,.25)}
+.user-card:active{transform:scale(.97)}
+.user-card .avatar{font-size:3.5rem;margin-bottom:12px;display:block}
+.user-card .uname{font-size:1.2rem;font-weight:700;color:var(--text)}
+.user-card .uprogress{font-size:.8rem;color:var(--text2);margin-top:6px}
+.user-badge{position:fixed;top:12px;right:12px;z-index:200;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--surface3);border-radius:24px;padding:6px 14px 6px 8px;cursor:pointer;transition:all .2s ease;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.user-badge:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(99,102,241,.25)}
+.user-badge .badge-avatar{font-size:1.4rem}
+.user-badge .badge-name{font-size:.8rem;font-weight:600;color:var(--text)}
+.user-badge .badge-switch{font-size:.65rem;color:var(--accent2);margin-left:4px}
+
 @media(min-width:1024px){.card{padding:24px}.categories{gap:10px}}
 </style>
 </head>
@@ -361,9 +375,42 @@ const CATEGORIES = {
   special: { name: 'Special Situations', icon: '⚠️', he: 'מצבים מיוחדים' }
 };
 
+// Users
+const USERS = [
+  { id: 'yoad', name: 'Yoad', avatar: '👨‍💻', color: '#6366f1' },
+  { id: 'hadar', name: 'Hadar', avatar: '👩‍💻', color: '#f472b6' }
+];
+
+let currentUser = null;
+
+function getStorageKey() {
+  return currentUser ? `dmv_progress_${currentUser.id}` : 'dmv_progress';
+}
+
+function selectUser(userId) {
+  currentUser = USERS.find(u => u.id === userId);
+  localStorage.setItem('dmv_last_user', userId);
+  state.progress = loadProgress();
+  state.screen = 'home';
+  render();
+}
+
+function switchUser() {
+  currentUser = null;
+  state.screen = 'user_select';
+  if (state.testTimerId) { clearInterval(state.testTimerId); state.testTimerId = null; }
+  render();
+}
+
+function getUserProgress(userId) {
+  try {
+    return JSON.parse(localStorage.getItem(`dmv_progress_${userId}`)) || { studied: {}, tests: [] };
+  } catch { return { studied: {}, tests: [] }; }
+}
+
 // State
 let state = {
-  screen: 'home',
+  screen: 'user_select',
   studyCat: null,
   studyIdx: 0,
   studyAnswered: false,
@@ -375,17 +422,17 @@ let state = {
   refTab: 'speed',
   learnCat: null,
   learnIdx: 0,
-  progress: loadProgress()
+  progress: { studied: {}, tests: [] }
 };
 
 function loadProgress() {
   try {
-    return JSON.parse(localStorage.getItem('dmv_progress')) || { studied: {}, tests: [] };
+    return JSON.parse(localStorage.getItem(getStorageKey())) || { studied: {}, tests: [] };
   } catch { return { studied: {}, tests: [] }; }
 }
 
 function saveProgress() {
-  localStorage.setItem('dmv_progress', JSON.stringify(state.progress));
+  localStorage.setItem(getStorageKey(), JSON.stringify(state.progress));
 }
 
 function markStudied(qId) {
@@ -406,6 +453,7 @@ function getCatQuestions(cat) {
 function render() {
   const app = document.getElementById('app');
   switch(state.screen) {
+    case 'user_select': app.innerHTML = renderUserSelect(); break;
     case 'home': app.innerHTML = renderHome(); break;
     case 'study': app.innerHTML = renderStudy(); break;
     case 'study_q': app.innerHTML = renderStudyQ(); break;
@@ -417,7 +465,46 @@ function render() {
     case 'learn': app.innerHTML = renderLearn(); break;
     case 'learn_topic': app.innerHTML = renderLearnTopic(); break;
   }
-  app.innerHTML += renderNav();
+  if (state.screen !== 'user_select') {
+    app.innerHTML += renderNav();
+    app.innerHTML += renderUserBadge();
+  }
+}
+
+function renderUserSelect() {
+  return `
+    <div class="screen active user-select-screen">
+      <div class="header">
+        <div class="logo">🚗</div>
+        <h1>CA DMV Test Prep</h1>
+        <p>הכנה למבחן התאוריה בקליפורניה</p>
+      </div>
+      <h2 style="font-size:1.3rem;font-weight:700;color:var(--text2)">?מי לומד היום</h2>
+      <div class="user-cards">
+        ${USERS.map(u => {
+          const prog = getUserProgress(u.id);
+          const studied = Object.keys(prog.studied).length;
+          const tests = prog.tests.length;
+          const best = tests > 0 ? Math.max(...prog.tests.map(t => t.score)) : 0;
+          return `
+          <div class="user-card" onclick="selectUser('${u.id}')" style="--card-accent:${u.color}">
+            <span class="avatar">${u.avatar}</span>
+            <span class="uname">${u.name}</span>
+            <span class="uprogress">${studied > 0 ? `${studied}/165 שאלות · ${tests} מבחנים${tests > 0 ? ` · ${best}%` : ''}` : 'טרם התחיל'}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+function renderUserBadge() {
+  if (!currentUser) return '';
+  return `
+    <div class="user-badge" onclick="switchUser()" title="החלף משתמש">
+      <span class="badge-avatar">${currentUser.avatar}</span>
+      <span class="badge-name">${currentUser.name}</span>
+      <span class="badge-switch">⇄</span>
+    </div>`;
 }
 
 function renderHome() {
@@ -882,6 +969,7 @@ render = function() {
 };
 
 function renderNav() {
+  if (state.screen === 'user_select') return '';
   const items = [
     { screen: 'home', icon: '🏠', label: 'ראשי' },
     { screen: 'learn', icon: '🎓', label: 'מדריך' },
@@ -1037,6 +1125,16 @@ function resetProgress() {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
+  // Auto-login last user
+  const lastUserId = localStorage.getItem('dmv_last_user');
+  if (lastUserId) {
+    const user = USERS.find(u => u.id === lastUserId);
+    if (user) {
+      currentUser = user;
+      state.progress = loadProgress();
+      state.screen = 'home';
+    }
+  }
   render();
 });
 
